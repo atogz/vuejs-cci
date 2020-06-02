@@ -1,19 +1,9 @@
 <template>
-    <div>
-        <div v-for="(product, index) in products" :key="product.id">
-            {{ product.name }} {{ product.price }}
-            <button @click="deleteProduct(index)">Удалить</button>
+    <div class="w-full flex space-x-3 md:space-x-12 cursor-pointer">
+        <div class="flex flex-col border-2 border-gray-400 p-6 hover:bg-accentColor rounded w-1/3" v-for="product in products" :key="product.id">
+            <span>{{ product.name }}</span>
+            <span>{{ product.price }}</span>
         </div>
-        <p>Итоговая сумма корзины: {{ totalSum }}</p>
-
-        <transition name="fade">
-            <div v-show="totalSum > 3000">Сумма больше 3000</div>
-        </transition>
-
-
-        <input type="text" v-model="userInput"/>
-        <button @click="addProductToCart({id:4, name: 'Новый товар', price: 2000})">Добавить товар в корзину</button>
-
     </div>
 </template>
 
