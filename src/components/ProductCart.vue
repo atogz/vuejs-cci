@@ -1,8 +1,8 @@
 <template>
     <div class="w-full flex space-x-3 md:space-x-12 cursor-pointer">
         <div class="flex flex-col border-2 border-gray-400 p-6 hover:bg-accentColor rounded w-1/3" v-for="product in products" :key="product.id">
-            <span>{{ product.name }}</span>
-            <span>{{ product.price }}</span>
+            <span>{{ product.title }}</span>
+            <span>{{ product.body }}</span>
         </div>
     </div>
 </template>
@@ -12,11 +12,7 @@
     name: "ProductCart",
     data() {
       return {
-        products: [
-          {id: 1, name: 'Товар 1', price: 200},
-          {id: 2, name: 'Товар 2', price: 400},
-          {id: 3, name: 'Товар 3', price: 600},
-        ],
+        products: [],
         userInput: '',
       }
     },
@@ -40,6 +36,17 @@
               alert('userInput больше 3 символов!')
             }
         }
+    },
+
+    created() {
+      return this.$http.get('https://jsonplaceholder.typicode.com/posts/1')
+        .then(response => {
+          console.log(response);
+          this.products.push(response.data);
+        })
+        .catch(error => {
+          console.log(error);
+        })
     }
   }
 </script>
